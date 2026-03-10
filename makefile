@@ -29,9 +29,6 @@ DEPFILES = $(SOURCES:.cpp=.d)
 clean:
 	rm -f $(TARGET) $(OBJECTS) $(DEPFILES)
 
-debug: CXXFLAGS += -g -O0
-debug: clean all
-
 release: CXXFLAGS += -O3 -DNDEBUG
 release: clean all
 
