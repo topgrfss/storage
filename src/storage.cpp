@@ -1,28 +1,45 @@
 #include "storage.hpp"
 
+#include <cstddef>
 #include <cstring>
 #include <optional>
+#include <strings.h>
 
 void Storage::put(const Item *item)
 {
-	Item *item_to_find = find_item((*item).key);
+	Item *existing_item = find_item((*item).key);
 
-	if (item_to_find != nullptr) {
-		std::strncpy(item_to_find->value, (*item).value,
-			     sizeof(item_to_find->value) - 1);
-		item_to_find->value[sizeof(item_to_find->value) - 1] = '\0';
+	if (existing_item != nullptr) {
+		std::strncpy(existing_item->value, (*item).value,
+			     sizeof(existing_item->value) - 1);
+		existing_item->value[sizeof(existing_item->value) - 1] = '\0';
 		return;
 	}
-	items_.push_back(*item_to_find);
+	items_.push_back(*item);
 }
 
 std::optional<Item> Storage::get(const char *key)
 {
-	return *find_item(key);
+	Item *item_to_find = find_item(key);
+
+	if (item_to_find == nullptr)
+		return std::nullopt;
+	return *item_to_find;
 }
 
 void Storage::remove(const char *key)
 {
+	Item *item_to_remove = find_item(key);
+	if (!item_to_remove)
+		return;
+
+	size_t ind = item_to_remove - items_.data();
+
+	if (ind != items_.size() - 1) {
+		items_[ind] = items_.back();
+	}
+
+	items_.pop_back();
 }
 
 int Storage::count() const
