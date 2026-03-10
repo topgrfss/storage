@@ -12,5 +12,5 @@ class Storage {
     private:
 	std::vector<Item> items_;
 
-	std::optional<Item> is_exist_(const char *key);
+	Item *find_item(const char *key);
 };
