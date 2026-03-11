@@ -2,6 +2,7 @@
 
 #include <cstddef>
 #include <cstring>
+#include <iostream>
 #include <optional>
 #include <strings.h>
 
@@ -44,6 +45,10 @@ void Storage::remove(const char *key)
 
 int Storage::count() const
 {
+	for (size_t i = 0; items_.size() > i; ++i) {
+		std::cout << "Value: " << items_[i].value << "\n";
+		std::cout << "Key: " << items_[i].key << "\n";
+	}
 	return items_.size();
 }
 

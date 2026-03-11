@@ -7,6 +7,7 @@ int main()
 	Storage str;
 
 	std::cout << str.count() << ": items now \n";
+	std::cout << "\n";
 
 	Item item1;
 	strcpy(item1.key, "key of first item");
@@ -15,6 +16,7 @@ int main()
 	str.put(&item1);
 
 	std::cout << str.count() << ": items now \n";
+	std::cout << "\n";
 
 	Item item2;
 	strcpy(item2.key, "key of second item");
@@ -23,10 +25,12 @@ int main()
 	str.put(&item2);
 
 	std::cout << str.count() << ": items now \n";
+	std::cout << "\n";
 
-        str.remove("key of second item");
+	str.remove("key of second item");
 
 	std::cout << str.count() << ": items now \n";
+	std::cout << "\n";
 
-        str.count();
+	str.count();
 }
